@@ -44,7 +44,7 @@ A API expõe dados brutos de performance coletados através do ecossistema `prom
 
 ## 3. Arquitetura do Monorepo (Orquestração Nx.dev)
 
-O projeto adota a arquitetura de **Monorepo Integrado** gerenciado pelo **Nx**, centralizando a governança e o ferramental de qualidade sem fragmentar o histórico do Git.
+Monorepo Integrado gerenciado pelo nx.
 
 teddy-open-finance/ (Raiz do Projeto)
 
