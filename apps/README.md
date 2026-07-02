@@ -1,4 +1,4 @@
-# 🦁 Teddy Open Finance - Desafio Técnico Sênior
+# Teddy Open Finance - Desafio Técnico Sênior
 
 Este repositório contém a solução do desafio técnico para a vaga de Desenvolvedor Sênior. A aplicação consiste em um sistema completo de gestão e auditoria de clientes, composto por uma API robusta em **NestJS** no Back-End e uma interface SPA moderna e responsiva em **React (Vite)** no Front-End.
 
@@ -6,7 +6,7 @@ O projeto foi inteiramente modularizado e conteinerizado, adotando padrões ríg
 
 ---
 
-## 🛠️ Tecnologias Utilizadas e Arquitetura
+## Tecnologias Utilizadas e Arquitetura
 
 A arquitetura foi desenhada para garantir isolamento de ambientes, facilidade de escala e alta performance local por meio do Docker.
 
