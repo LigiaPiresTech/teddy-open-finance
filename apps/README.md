@@ -49,6 +49,7 @@ A API expõe dados brutos de performance coletados através do ecossistema `prom
 O projeto adota a arquitetura de **Monorepo Integrado** gerenciado pelo **Nx**, centralizando a governança e o ferramental de qualidade sem fragmentar o histórico do Git.
 
 teddy-open-finance/ (Raiz do Projeto)
+
 ├── .github/workflows/    <-- Pipelines de CI/CD Isolados (GitHub Actions)
 
 ├── apps/
@@ -64,5 +65,6 @@ teddy-open-finance/ (Raiz do Projeto)
 ├── package.json          <-- Gerenciamento global de dependências
 
 └── README.md             <-- Documentação técnica de arquitetura
+
 ├── package.json          <-- Gerenciamento global de dependências
 └── README.md             <-- Documentação técnica de arquitetura
