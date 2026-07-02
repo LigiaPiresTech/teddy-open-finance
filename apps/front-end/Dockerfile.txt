@@ -1,0 +1,33 @@
+# =============================================================================
+# ESTÁGIO 1: COMPILAÇÃO (BUILD)
+# =============================================================================
+FROM node:18-alpine AS builder
+
+# Define o diretório de trabalho interno
+WORKDIR /usr/src/app
+
+# Copia os arquivos de dependências
+COPY package*.json ./
+
+# Instala as dependências do projeto
+RUN npm install
+
+# Copia todo o código-fonte do front-end
+COPY . .
+
+# Executa o build do Vite (gera os arquivos estáticos na pasta /dist)
+RUN npm run build
+
+# =============================================================================
+# ESTÁGIO 2: SERVIDOR WEB (PRODUCTION)
+# =============================================================================
+FROM nginx:1.23-alpine AS runner
+
+# Copia os arquivos compilados do estágio anterior para a pasta pública do Nginx
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+
+# Expõe a porta padrão do Nginx (80)
+EXPOSE 80
+
+# Inicia o Nginx em primeiro plano
+CMD ["nginx", "-g", "daemon off;"]

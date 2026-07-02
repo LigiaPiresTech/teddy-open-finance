@@ -1,0 +1,61 @@
+/* =============================================================================
+   INJEÇÃO DAS DIRETIVAS BASE DO TAILWIND CSS
+   ============================================================================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   ANIMAÇÕES E TRANSIÇÕES CUSTOMIZADAS (Para Modais e Alertas)
+   ============================================================================= */
+@layer utilities {
+  /* Animação de surgimento suave para mensagens de erro */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+
+  /* Animação de deslizar da direita para o Modal Lateral (ClientModal) */
+  .animate-slide-in {
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* =============================================================================
+   REGRAS GLOBAIS DE ESTILIZAÇÃO (CSS RESET / BASE OVERRIDES)
+   ============================================================================= */
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove as setas padrão de inputs do tipo número (usado na Renda Mensal) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

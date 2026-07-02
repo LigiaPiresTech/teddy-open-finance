@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL exigido
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: teddy_postgres_local
+    environment:
+      POSTGRES_DB: teddy_open_finance
+      POSTGRES_USER: teddy_admin
+      POSTGRES_PASSWORD: secret_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_local:/var/lib/postgresql/data
+    networks:
+      - teddy_net_be
+
+  # Serviço da API NestJS
+  api_nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: teddy_api_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=postgres_db
+      - DB_PORT=5432
+      - DB_USERNAME=teddy_admin
+      - DB_PASSWORD=secret_password_2026
+      - DB_DATABASE=teddy_open_finance
+      - JWT_SECRET=tech_lead_teddy_token_secret_2026
+    depends_on:
+      - postgres_db
+    networks:
+      - teddy_net_be
+
+volumes:
+  pgdata_local:
+
+networks:
+  teddy_net_be:
+    driver: bridge

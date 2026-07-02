@@ -1,0 +1,9 @@
+{
+  "name": "teddy-open-finance",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "nx": "latest"
+  }
+}

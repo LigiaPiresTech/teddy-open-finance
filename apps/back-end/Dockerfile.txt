@@ -1,0 +1,43 @@
+# =============================================================================
+# ESTÁGIO 1: COMPILAÇÃO (BUILD)
+# =============================================================================
+FROM node:18-alpine AS builder
+
+# Define o diretório de trabalho dentro do contentor
+WORKDIR /usr/src/app
+
+# Copia os ficheiros de definição de dependências
+COPY package*.json ./
+
+# Instala todas as dependências (incluindo as de desenvolvimento para o build)
+RUN npm install
+
+# Copia todo o código fonte do back-end para dentro do contentor
+COPY . .
+
+# Executa o comando de compilação do NestJS (gera a pasta /dist com código JavaScript puro)
+RUN npm run build
+
+# Remove as dependências de desenvolvimento para poupar espaço
+RUN npm prune --production
+
+# =============================================================================
+# ESTÁGIO 2: EXECUÇÃO (PRODUCTION)
+# =============================================================================
+FROM node:18-alpine AS runner
+
+WORKDIR /usr/src/app
+
+# Define a variável de ambiente para produção
+ENV NODE_ENV=production
+
+# Copia apenas o código compilado e as dependências de produção do estágio anterior
+COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
+
+# Expõe a porta padrão que configurámos na API NestJS
+EXPOSE 3000
+
+# Comando para iniciar a aplicação
+CMD ["node", "dist/main.js"]
