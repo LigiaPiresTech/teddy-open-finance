@@ -50,12 +50,19 @@ O projeto adota a arquitetura de **Monorepo Integrado** gerenciado pelo **Nx**, 
 
 teddy-open-finance/ (Raiz do Projeto)
 ├── .github/workflows/    <-- Pipelines de CI/CD Isolados (GitHub Actions)
+
 ├── apps/
+
 │   ├── back-end/         <-- API RESTful (NestJS, TypeORM, Jest)
+
 │   └── front-end/        <-- SPA Interface (React, Vite, Tailwind, Vitest)
+
 ├── libs/                 <-- Código, contratos e tipos compartilhados
+
 ├── nx.json               <-- Grafo de dependências e regras de cache do Nx
+
 ├── package.json          <-- Gerenciamento global de dependências
+
 └── README.md             <-- Documentação técnica de arquitetura
 ├── package.json          <-- Gerenciamento global de dependências
 └── README.md             <-- Documentação técnica de arquitetura
