@@ -30,15 +30,15 @@ A engenharia do sistema foi concebida focando na resiliência operacional. A obs
 
 ### I. Logs Estruturados em formato JSON
 Substituindo os logs convencionais em formato de texto livre (strings), a API utiliza um Logger customizado (baseado em `Winston/Pino`) que formata todas as saídas do terminal em objetos JSON estruturados.
-* **Por que isso é vital?** Ferramentas de agregação e ingestão de telemetria (como *Grafana Loki*, *Datadog* ou *AWS CloudWatch Logs Insights*) conseguem quebrar, indexar e pesquisar propriedades do JSON (como `statusCode`, `executionTime`, `userId` ou `context`) em milissegundos dentro de terabytes de dados, acelerando o MTTR (*Mean Time to Repair*).
+Ferramentas de agregação e ingestão de telemetria (como *Grafana Loki*, *Datadog* ou *AWS CloudWatch Logs Insights*) conseguem quebrar, indexar e pesquisar propriedades do JSON (como `statusCode`, `executionTime`, `userId` ou `context`) em milissegundos dentro de terabytes de dados, acelerando o MTTR (*Mean Time to Repair*).
 
 ### II. Endpoint de Diagnóstico de Saúde (`/healthz`)
 Integrado ao framework através do módulo `@nestjs/terminus`, este endpoint executa sondagens de integridade (*Health Checks*) em tempo real. Ele verifica não apenas se o servidor HTTP está de pé, mas também testa a conectividade e a latência de escrita/leitura com o banco de dados PostgreSQL.
-* **Por que isso é vital?** Orquestradores de containers utilizam essa rota como *Liveness e Readiness Probes*. Se o banco de dados falhar, o endpoint responde com `503 Service Unavailable`, sinalizando para a infraestrutura interromper o direcionamento de tráfego para aquele container específico e reiniciá-lo de forma automatizada.
+Orquestradores de containers utilizam essa rota como *Liveness e Readiness Probes*. Se o banco de dados falhar, o endpoint responde com `503 Service Unavailable`, sinalizando para a infraestrutura interromper o direcionamento de tráfego para aquele container específico e reiniciá-lo de forma automatizada.
 
 ### III. Telemetria e Métricas no Padrão Prometheus (`/metrics`)
 A API expõe dados brutos de performance coletados através do ecossistema `prom-client` formatados sob a especificação oficial do Prometheus.
-* **Por que isso é vital?** O servidor do Prometheus realiza raspagens (*scraping*) contínuas dessa rota, coletando métricas críticas do Node.js (como uso de Heap de memória RAM, saturação de CPU, lag do *Event Loop* e taxa de requisições por segundo). Esses dados alimentam dashboards em tempo real no **Grafana** e disparam alarmes automáticos em canais de comunicação antes que uma degradação de performance afete o usuário final.
+Issso é vital porque o servidor do Prometheus realiza raspagens (*scraping*) contínuas dessa rota, coletando métricas críticas do Node.js (como uso de Heap de memória RAM, saturação de CPU, lag do *Event Loop* e taxa de requisições por segundo). Esses dados alimentam dashboards em tempo real no **Grafana** e disparam alarmes automáticos em canais de comunicação antes que uma degradação de performance afete o usuário final.
 
 ---
 
@@ -158,3 +158,4 @@ Para garantir que o sistema aguente picos de acessos no Open Finance sem estoura
 * `test(backend): adiciona teste unitário de incremento de contador de acessos`
 
 └── README.md             <-- Documentação técnica de arquitetura
+
