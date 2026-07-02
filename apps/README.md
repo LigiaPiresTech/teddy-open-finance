@@ -6,8 +6,6 @@ Este repositório apresenta uma solução de nível corporativo para o gerenciam
 
 ## 1. Mapeamento Estrito dos Requisitos do Desafio
 
-Esta aplicação atende a 100% dos critérios obrigatórios e diferenciais exigidos no escopo técnico:
-
 ### Back-End (NestJS)
 * **`POST /auth/login`**: Endpoint público de autenticação. Realiza a validação de credenciais utilizando criptografia asssimétrica com `bcrypt` para comparação de hashes e emite um token **JWT (JSON Web Token)** assinado e temporizado.
 * **`POST /clients`**: Criação de clientes protegida por guardas de rota JWT (`JwtAuthGuard`). Possui camada de validação sintática e semântica de payloads na borda via `class-validator`, impedindo a inserção de CPFs ou CNJPs duplicados ou inválidos.
