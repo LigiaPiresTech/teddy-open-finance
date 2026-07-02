@@ -65,6 +65,3 @@ teddy-open-finance/ (Raiz do Projeto)
 ├── package.json          <-- Gerenciamento global de dependências
 
 └── README.md             <-- Documentação técnica de arquitetura
-
-├── package.json          <-- Gerenciamento global de dependências
-└── README.md             <-- Documentação técnica de arquitetura
