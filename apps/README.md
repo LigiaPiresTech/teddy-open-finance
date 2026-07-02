@@ -1,15 +1,14 @@
-# 🦁 Teddy Open Finance - Sistema de Auditoria e Gestão de Clientes
-## 🚀 Desafio Técnico Sênior - Documentação de Engenharia & Arquitetura
+# Teddy Open Finance - Documentação de Engenharia & Arquitetura
 
 Este repositório apresenta uma solução de nível corporativo para o gerenciamento, monitoramento e auditoria de clientes. O ecossistema foi projetado sob o padrão de **Monorepo**, isolando as camadas de negócios e apresentação em microsserviços/aplicações independentes (`apps/`), garantindo desacoplamento, robustez e alta performance.
 
 ---
 
-## 🏛️ 1. Mapeamento Estrito dos Requisitos do Desafio
+## 1. Mapeamento Estrito dos Requisitos do Desafio
 
 Esta aplicação atende a 100% dos critérios obrigatórios e diferenciais exigidos no escopo técnico:
 
-### ⚙️ Back-End (NestJS)
+### Back-End (NestJS)
 * **`POST /auth/login`**: Endpoint público de autenticação. Realiza a validação de credenciais utilizando criptografia asssimétrica com `bcrypt` para comparação de hashes e emite um token **JWT (JSON Web Token)** assinado e temporizado.
 * **`POST /clients`**: Criação de clientes protegida por guardas de rota JWT (`JwtAuthGuard`). Possui camada de validação sintática e semântica de payloads na borda via `class-validator`, impedindo a inserção de CPFs ou CNJPs duplicados ou inválidos.
 * **`GET /clients`**: Listagem geral de clientes ativos. Implementa automaticamente um filtro global para ignorar registros que sofreram exclusão lógica (*Soft Delete*).
@@ -17,7 +16,7 @@ Esta aplicação atende a 100% dos critérios obrigatórios e diferenciais exigi
 * **`PUT /clients/:id`**: Atualização parcial/total de dados cadastrais com controle de timestamps (`updatedAt`).
 * **`DELETE /clients/:id`**: Implementação nativa de **Soft Delete**. O registro não é expurgado fisicamente da tabela; em vez disso, o campo `deletedAt` é populado com o timestamp da ação, preservando o histórico auditável do ecossistema.
 
-### 🎨 Front-End (React + Vite + TypeScript)
+### Front-End (React + Vite + TypeScript)
 * **Fluxo de Autenticação**: Tela de Login integrada a um contexto de segurança (`AuthContext`). Se o token JWT não estiver presente ou estiver expirado no `localStorage`, interceptores do `Axios` barram a navegação e forçam o redirecionamento automático para a rota pública `/login`.
 * **Dashboard Analítico**: Centraliza três componentes estratégicos consumindo a API de forma assíncrona:
   * **Cards de Métricas**: Indicadores de volume total de clientes ativos e média de faturamento/renda ponderada.
@@ -27,7 +26,7 @@ Esta aplicação atende a 100% dos critérios obrigatórios e diferenciais exigi
 
 ---
 
-## 👁️ 2. Observabilidade de Nível de Produção (Production-Ready)
+## 2. Observabilidade de Nível de Produção (Production-Ready)
 
 A engenharia do sistema foi concebida focando na resiliência operacional. A observabilidade permite que o time de SRE/Infraestrutura mitigue incidentes rapidamente baseado em três pilares:
 
@@ -45,7 +44,7 @@ A API expõe dados brutos de performance coletados através do ecossistema `prom
 
 ---
 
-## 🏗️ 3. Arquitetura do Monorepo (Orquestração Nx.dev)
+## 3. Arquitetura do Monorepo (Orquestração Nx.dev)
 
 O projeto adota a arquitetura de **Monorepo Integrado** gerenciado pelo **Nx**, centralizando a governança e o ferramental de qualidade sem fragmentar o histórico do Git.
 
@@ -58,6 +57,5 @@ teddy-open-finance/ (Raiz do Projeto)
 ├── nx.json               <-- Grafo de dependências e regras de cache do Nx
 ├── package.json          <-- Gerenciamento global de dependências
 └── README.md             <-- Documentação técnica de arquitetura
-├── nx.json               <-- Grafo de dependências e regras de cache do Nx
 ├── package.json          <-- Gerenciamento global de dependências
 └── README.md             <-- Documentação técnica de arquitetura
